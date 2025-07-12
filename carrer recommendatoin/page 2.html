@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Career Compass - Skills Assessment</title>
+    <style>
+
+      .con {
+             width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+             padding: 40px 20px;
+             
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            min-height: 100vh;
+        }
+        
+       
+        header {
+      text-align: center;
+      margin-bottom: 50px;
+
+    }
+        .skills-container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+      font-size: 1.8rem;
+      color: #2d3748;
+      margin-bottom: 30px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background-color: #4361ee;
+    }
+
+  
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .submit-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .submit-btn {
+            background-color: #4361ee;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background-color: #354fcb;
+        }
+        
+        .recommendations {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        
+        .recommendation {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #e6effe;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+        
+        .roadmap-container {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 12px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .roadmap-container h3 {
+            font-size: 1.5rem;
+            color: #4361ee;
+            margin-bottom: 15px;
+        }
+        
+        #roadmapViewer {
+            width: 100%;
+            height: 600px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        }
+        
+        .roadmap-credit {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #718096;
+        }
+        
+        .roadmap-credit a {
+            color: #4361ee;
+            text-decoration: none;
+        }
+        
+        .roadmap-credit a:hover {
+            text-decoration: underline;
+        }
+        
+        .remove-recommendation {
+            cursor: pointer;
+            font-weight: bold;
+            color: red;
+            font-size: 1.2rem;
+        }
+        
+        .result-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .result-container h3 {
+            color: #4361ee;
+            margin-bottom: 10px;
+        }
+        
+        .result-container p {
+            font-size: 1.1rem;
+            color: #333;
+            margin: 5px 0;
+        }
+        
+        #popup {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ff4d4d;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 9999;
+            font-weight: bold;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="con">
+        <header>
+          <h1 style="font-size: 50px;">   Share Your Skills  </h1>
+          <p style="font-size: 25px;">🔥"Your skills are your superpowers — share them to unlock the path to your purpose."</p>
+        </header>
+
+    
+        <div class="skills-container">
+            <h2 class="section-title">Skills Assessment</h2>
+            <label for="skillsInput">Enter your skills (comma-separated):</label>
+            <input type="text" id="skillsInput" class="form-control" placeholder="e.g., Python, Project Management" />
+
+          
+            <div class="submit-container">
+                <button class="submit-btn" id="submitBtn">Get Recommendations</button>
+            </div>
+        </div>
+
+        <div id="recommendations" class="recommendations" style="display: none;">
+            <h2>Recommended Careers</h2>
+            <div id="recommendationList"></div>
+        </div>
+
+        <div id="result" class="result-container" style="display:none;">
+            <h3>Career Recommendation</h3>
+            <p id="careerOutput"></p>
+            <p id="missingSkillsOutput"></p>
+        </div>
+
+        <div id="roadmapSection" class="roadmap-container" style="display: none;">
+            <h3>Career Roadmap</h3>
+            <iframe id="roadmapViewer" frameborder="0"></iframe>
+            <p class="roadmap-credit">
+                Roadmap provided by roadmap.sh. For more details,
+                <a href="https://roadmap.sh" target="_blank" rel="noopener noreferrer">click here</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Popup -->
+    <div id="popup"></div>
+
+    <script>
+        
+        document.getElementById("submitBtn").addEventListener("click", async function(event) {
+            event.preventDefault();
+
+            const skillsInput = document.getElementById("skillsInput").value.trim();
+            if (!skillsInput) {
+                showPopup("Please enter at least one skill!");
+                return;
+            }
+
+         
+
+     
+            const skillsArray = skillsInput.split(",").map(skill => skill.trim());
+
+            try {
+                let response = await fetch("http://127.0.0.1:5000/recommend", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        skills: skillsArray
+                    })
+                });
+
+                let data = await response.json();
+
+                if (!response.ok) {
+                    showPopup(data.error || "Something went wrong.");
+                    return;
+                }
+
+                updateUI(data);
+            } catch (error) {
+                console.error("Error:", error);
+                showPopup("Error fetching recommendations. Please try again.");
+            }
+        });
+
+        function updateUI(data) {
+            const result = document.getElementById("result");
+            document.getElementById("careerOutput").innerHTML = `<strong>Recommended Career:</strong> ${data.career}`;
+
+            if (data.missing_skills.length > 0 && data.missing_skills[0] !== "None! You are fully qualified!") {
+                document.getElementById("missingSkillsOutput").innerHTML =
+                    `<strong>Missing Skills:</strong> ${data.missing_skills.join(", ")}`;
+            } else {
+                document.getElementById("missingSkillsOutput").innerHTML =
+                    `<strong>You have all the required skills! 🎉</strong>`;
+            }
+
+            result.style.display = "block";
+
+            const roadmapSection = document.getElementById("roadmapSection");
+            const roadmapViewer = document.getElementById("roadmapViewer");
+            const pdfPath = `roadmaps/${data.career}.pdf`; // Example: "Frontend.pdf"
+            roadmapViewer.src = pdfPath;
+            roadmapSection.style.display = "block";
+        }
+
+        function showPopup(message) {
+            const popup = document.getElementById("popup");
+            popup.textContent = message;
+            popup.style.display = "block";
+
+            setTimeout(() => {
+                popup.style.display = "none";
+            }, 3000);
+        }
+
+        function displayRecommendations(careers) {
+            const recommendationsDiv = document.getElementById("recommendations");
+            const recommendationList = document.getElementById("recommendationList");
+
+            recommendationList.innerHTML = "";
+
+            if (careers.length === 0) {
+                recommendationList.innerHTML = "<p>No recommendations found.</p>";
+                return;
+            }
+
+            recommendationsDiv.style.display = "block";
+
+            careers.forEach(career => {
+                const div = document.createElement("div");
+                div.className = "recommendation";
+                div.innerHTML = `
+          <span>${career}</span>
+          <span class="remove-recommendation">×</span>
+        `;
+
+                div.querySelector(".remove-recommendation").addEventListener("click", () => {
+                    div.remove();
+                });
+
+                recommendationList.appendChild(div);
+            });
+        }
+    </script>
+</body>
+
+</html>
